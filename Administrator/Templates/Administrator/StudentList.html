@@ -1,0 +1,50 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 24px;">Student List</h1>
+
+    <form method="post" style="    overflow-x: auto;">
+        {% csrf_token %}
+        <table  class="table table-bordered table-hover " >
+            <tr>
+                <td>Sno</td>
+                <td> KTU ID</td>
+                <td> Name</td>
+                <td> Email</td>
+                <td> Contact</td>
+                <td> Semester</td>
+                <td> Academic Year</td>
+                <td> Department</td>
+                <td> CGPA</td>
+                <td> Backlogs</td>
+                <td> DOB</td>
+                <td>Action</td>
+             </tr>
+             {% for i in data %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.studentreg_ktuid}}</td>
+                <td>{{i.studentreg_name}}</td>
+                <td>{{i.studentreg_email}}</td>
+                <td>{{i.studentreg_contact}}</td>
+                <td>{{i.semester.semester_name}}</td>
+                <td>{{i.academicyear.academicyear_name}}</td>
+                <td>{{i.department.department_name}}</td>
+                <td>{{i.studentreg_cgpa}}</td>
+                <td>{{i.studentreg_backlog}}</td>
+                <td>{{i.studentreg_dob}}</td>
+                <td><a href="{% url 'Admin:deletestudent' i.id %}">Delete</a></td>
+                <td><a href="{% url 'Admin:editstudent' i.id %}">Edit</a></td>
+             </tr>
+            {% endfor %}
+            </table>     
+</body>
+</html>
+{% endblock %}

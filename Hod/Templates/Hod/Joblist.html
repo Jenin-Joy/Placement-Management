@@ -1,0 +1,41 @@
+{% extends 'Hod/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPost</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <table  class="table table-bordered" >
+            <tr>
+                <td>Sno</td>
+                <td>Company Name</td>
+                <td>Company Details</td>
+                <td>CGPA Criteria</td>
+                <td>Backlogs</td>
+                <td>File</td>
+                <td>Last Date</td>
+                <td>Action</td>
+             </tr>
+             {% for i in data %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.jobpost_companyname}}</td>
+                <td>{{i.jobpost_details}}</td>
+                <td>{{i.jobpost_mincgpa}}</td>
+                <td>{{i.jobpost_backlog}}</td>
+                <td>{{i.jobpost_file_doc}}</td>
+                <td>{{i.jobpost_lastdate}}</td>
+                <td>
+                    <a href="{% url 'Hod:Eligiblelist' i.id %}">View Eligible Students</a>
+                </td>
+             </tr>
+            {% endfor %}
+            </table>
+        </body>
+        </html>
+        {% endblock %}

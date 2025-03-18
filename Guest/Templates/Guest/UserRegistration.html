@@ -1,0 +1,120 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+<table border="2" width="100%">
+    <tr>
+		<td>Name</td>
+		<td><input type="text" name="txtname" placeholder="Enter the name"></td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td><input type="email" name="txtemail" placeholder="Enter the emailid"></td>
+	</tr>
+    <tr>
+		<td>Contact</td>
+		<td><input type="text" name="txtcontact"></td>
+	</tr>
+    <tr>
+		<td>Address</td>
+		<td>
+            <textarea name="txtaddress" rows="6" cols="20"></textarea>
+    </td>
+	</tr>
+    <tr>
+		<td>Gender</td>
+		<td><input type="radio" name="gender" value="Male">Male
+            <input type="radio" name="gender" value="Female">Female
+        </td>
+	</tr><tr>
+		<td>Photo</td>
+		<td><input type="file" name="file_photo" ></td>
+	</tr>
+
+
+	<tr>
+		<td>Password</td>
+		<td><input type="password" name="txtpass" placeholder="Enter the password"></td>
+	</tr>
+
+	<tr>
+ 		<td colspan="2" align="center">
+    			<input type="submit" name="btnlogin" value="Register">
+ 		</td>
+	</tr>
+
+
+</table>
+</form>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Guest:UserRegistration' %}"
+</script>
+{% endif %}-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'Registration/fonts/material-icon/css/material-design-iconic-font.min.css'%}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'Registration/css/style.css'%}">
+</head>
+<body>
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Create account</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="txtname" id="name" placeholder="Enter Your Username"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="txtemail" id="email" placeholder="Enter Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="txtpass" id="password" placeholder="Enter Password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="rpass" id="re_password" placeholder="Confirm your password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        Have already an account ? <a href="{% url 'Guest:Login' %}" class="loginhere-link">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'Registration/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'Registration/js/main.js'%}"></script>
+</body>
+</html>

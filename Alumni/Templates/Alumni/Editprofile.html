@@ -1,0 +1,35 @@
+{% extends 'Alumni/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editprofile</title>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 24px;">Edit Profile</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover ">
+         <tr>
+            <td>Name</td>
+            <td><input type="text" name="txt_name" value="{{edit.alumnireg_name}}" ></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="txt_email" value="{{edit.alumnireg_email}}" ></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td><input type="text" name="txtcontact" value="{{edit.alumnireg_contact}}" ></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="btn_submit"class="btn btn-primary"style="background-color: #44d2f6; color: white; "  value="Submit">
+            </td>
+        </tr>
+</body>
+</html>
+{% endblock %}

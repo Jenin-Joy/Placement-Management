@@ -1,0 +1,59 @@
+
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Option</title>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 24px;">Add Option</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <table class="table table-bordered table-hover ">
+        <tr>
+          <td>ANSWER</td>
+          <td><textarea name="txt_answer"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="radio" name="txt_radio" id="" value="True">TRUE
+                <input type="radio" name="txt_radio" id="" value="False">FALSE</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" class="btn btn-primary" style="background-color: #44d2f6; color: white;" value="ADD"></td>
+          </tr>   
+        </table>
+    </form>
+    <table class="table table-bordered table-hover ">
+        <tr>
+            <th>Sno</th>
+            <th>Questions</th>
+            <th>Answer</th>
+            <th>True or False</th>
+            <th>Action</th>
+            
+  
+        </tr>
+            {% for i in result %}
+            <tr>
+             <td>{{forloop.counter}}</td>
+             <td width="250">{{i.questions.question}}</td> 
+             <td>{{i.answer}}</td>
+             <td>{{i.status}}</td> 
+             <td><a href="{% url 'Admin:delopt' i.id id %}">Delete</a></td>
+      
+             
+        </tr>
+        {% endfor %}
+    </table>
+    {% if msg %}
+    <script>
+        alert("{{msg}}")
+        window.location = "{% url 'Admin:addoptions' id %}"
+    </script>
+    {% endif %}
+</body>
+</html>
+{% endblock %}

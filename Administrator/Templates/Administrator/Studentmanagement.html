@@ -1,0 +1,64 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 24px;">Student Management</h1>
+
+    <div class="main-panel container" style="    margin-top: 42px;"> <!-- Added 'container' for proper alignment -->
+      <div class="row row-cols-1 row-cols-md-2 g-4" style="gap: 40px;"> <!-- 'gy-4' is redundant as 'g-4' includes 'gy-4' -->
+        <div class="col" style="max-width: 45%;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">STUDENT REGISTRATION</h2>
+                    <p class="card-text"></p>
+                    <a href="{% url 'Admin:upload_excel' %}" class="btn" style="background-color: #44d2f6; color: white;">REGISTER</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="max-width: 45%;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">ADD DEPARTMENT</h2>
+                    <p class="card-text"></p>
+                    <a href="{% url 'Admin:department' %}" class="btn" style="background-color: #44d2f6; color: white;">ADD</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="max-width: 45%;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">ADD ACADEMICYEAR</h2>
+                    <p class="card-text"></p>
+                    <a href="{% url 'Admin:academicyear' %}" class="btn" style="background-color: #44d2f6; color: white;">ADD</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="max-width: 45%;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">ADD SEMESTER</h2>
+                    <p class="card-text"></p>
+                    <a href="{% url 'Admin:semester' %}" class="btn" style="background-color: #44d2f6; color: white;">ADD</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="max-width: 45%;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">STUDENT LIST</h2>
+                    <p class="card-text"></p>
+                    <a href="{% url 'Admin:studentlist' %}" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                </div>
+            </div>
+        </div>
+     </div>
+    </div>
+</body>
+</html>
+{% endblock %}

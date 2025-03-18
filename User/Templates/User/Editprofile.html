@@ -1,0 +1,37 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditProfile</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover ">
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="file_doc"></td>
+            </tr>
+         <tr>
+            <td>Name</td>
+            <td><input type="text" name="txt_name" value="{{edit.studentreg_name}}" ></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="txt_email" value="{{edit.studentreg_email}}" ></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td><input type="text" name="txtcontact" value="{{edit.studentreg_contact}}" ></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="btn_submit" lass="btn btn-primary"style="background-color: #44d2f6; color: white; "value="SUBMIT">
+            </td>
+        </tr>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,357 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>HOD Homepage</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{% static 'User/vendors/mdi/css/materialdesignicons.min.css'%}">
+  <link rel="stylesheet" href="{% static 'User/vendors/css/vendor.bundle.base.css'%}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'User/css/style.css'%}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'User/images/favicon.png'%}" />
+  <style>
+    .navbar {
+    font-weight: 400;
+    transition: background 0.25sease;
+    -webkit-transition: background 0.25sease;
+    -moz-transition: background 0.25s ease;
+    -ms-transition: background 0.25s ease;
+    background: #102147;
+    /* background-size: cover; */
+    height: 91px;
+    width: auto;
+}
+  </style>
+</head>
+<body>
+  <div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background: #102147 !important;">
+      <ul class="nav">
+        <li class="nav-item sidebar-category">
+         
+          <span></span>
+        </li>
+      </li>
+      
+        <li class="nav-item sidebar-category">
+          
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <!--a class="nav-link" data-toggle="collapse" href="{% static 'User/#ui-basic'%}" aria-expanded="false" aria-controls="ui-basic">
+            <i class="mdi mdi-palette menu-icon"></i>
+            <span class="menu-title">UI Elements</span>
+            <i class="menu-arrow"></i>
+          </a-->
+          <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% static 'User/pages/ui-features/buttons.html'%}">Buttons</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% static 'User/pages/ui-features/typography.html'%}">Typography</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Hod:myprofile' %}">
+            <i class="mdi mdi-view-headline menu-icon"></i>
+            <span class="menu-title">MY PROFILE</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Hod:viewexam' %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">TEST REPORT</span>
+          </a>
+        </li>
+        <!--li class="nav-item">
+          <a class="nav-link" href="{% url 'Hod:studentlist' %}">
+            <i class="mdi mdi-grid-large menu-icon"></i>
+            <span class="menu-title">STUDENT LIST</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="mdi mdi-grid-large menu-icon"></i>
+            <span class="menu-title">TEST REPORTS</span>
+          </a>
+        </li-->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Guest:Login' %}">
+            <i class="mdi mdi-emoticon menu-icon"></i>
+            <span class="menu-title">LOGOUT</span>
+          </a>
+        </li>
+        <!--li class="nav-item sidebar-category">
+          <p>Pages</p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="{% static 'User/#auth'%}" aria-expanded="false" aria-controls="auth">
+            <i class="mdi mdi-account menu-icon"></i>
+            <span class="menu-title">User Pages</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="auth">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% static 'User/pages/samples/login.html'%}"> Login </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% static 'User/pages/samples/login-2.html'%}"> Login 2 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% static 'User/pages/samples/register.html'%}"> Register </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% static 'User/pages/samples/register-2.html'%}"> Register 2 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% static 'User/pages/samples/lock-screen.html'%}"> Lockscreen </a></li>
+            </ul>
+          </div>
+        </li-->
+        
+          
+        
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" style="margin-right: 59.437rem;">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="d-flex align-items-center justify-content-between">
+            <p class="navbar-brand brand-logo fw-bolder fs-3 mb-0" style="font-size:33px;">  UNIHIRE</p>
+            <h4 class="fw-bolder mb-0 d-none d-md-block mt-1">Welcome back</h4>
+         </div>
+      
+          <!-- <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown mr-1">
+              <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-calendar mx-0"></i>
+                <span class="count bg-info">2</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                      <img src="{% static 'User/images/faces/face4.jpg'%}" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content flex-grow">
+                    <h6 class="preview-subject ellipsis font-weight-normal">David Grey
+                    </h6>
+                    <p class="font-weight-light small-text text-muted mb-0">
+                      The meeting is cancelled
+                    </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                      <img src="{% static 'User/images/faces/face2.jpg'%}" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content flex-grow">
+                    <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
+                    </h6>
+                    <p class="font-weight-light small-text text-muted mb-0">
+                      New product launch
+                    </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                      <img src="{% static 'User/images/faces/face3.jpg'%}" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content flex-grow">
+                    <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
+                    </h6>
+                    <p class="font-weight-light small-text text-muted mb-0">
+                      Upcoming board meeting
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li class="nav-item dropdown mr-2">
+              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-email-open mx-0"></i>
+                <span class="count bg-danger">1</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-success">
+                      <i class="mdi mdi-information mx-0"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                    <p class="font-weight-light small-text mb-0 text-muted">
+                      Just now
+                    </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-warning">
+                      <i class="mdi mdi-settings mx-0"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <h6 class="preview-subject font-weight-normal">Settings</h6>
+                    <p class="font-weight-light small-text mb-0 text-muted">
+                      Private message
+                    </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-info">
+                      <i class="mdi mdi-account-box mx-0"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                    <p class="font-weight-light small-text mb-0 text-muted">
+                      2 days ago
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul> -->
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+        <!-- <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
+          <ul class="navbar-nav mr-lg-2">
+            <li class="nav-item nav-search d-none d-lg-block">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search">
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right">
+            
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item">
+                  <i class="mdi mdi-settings text-primary"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item">
+                  <i class="mdi mdi-logout text-primary"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link icon-link">
+                <i class="mdi mdi-plus-circle-outline"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link icon-link">
+                <i class="mdi mdi-web"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link icon-link">
+                <i class="mdi mdi-clock-outline"></i>
+              </a>
+            </li>
+          </ul>
+        </div> -->
+      </nav>
+      <!-- partial -->
+      <div class="main-panel container" style="    margin-top: 42px;"> <!-- Added 'container' for proper alignment -->
+        <div class="row row-cols-1 row-cols-md-2 g-4" style="gap: 40px;"> <!-- 'gy-4' is redundant as 'g-4' includes 'gy-4' -->
+            <div class="col" style="max-width: 45%;">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">STUDENT LIST</h2>
+                        <p class="card-text"></p>
+                        <a href="{% url 'Hod:studentlist' %}" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="max-width: 45%;">
+              <div class="card">
+                  <div class="card-body">
+                      <h2 class="card-title">CONFIRM LIST</h2>
+                      <p class="card-text"></p>
+                      <a href="{% url 'Hod:confirmlist' %}" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col" style="max-width: 45%;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">JOB LIST</h2>
+                    <p class="card-text"></p>
+                    <a href="{% url 'Hod:Joblist' %}" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                </div>
+            </div>
+        </div>
+           <div class="col" style="max-width: 45%;">
+              <div class="card">
+                  <div class="card-body">
+                      <h2 class="card-title">PLACED LIST</h2>
+                      <p class="card-text"></p>
+                      <a href="{% url 'Hod:placedlist' %}" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                  </div>
+              </div>
+          </div>
+            <!--div class="col" style="max-width: 45%;">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">TEST REPORTS</h2>
+                        <p class="card-text"></p>
+                        <a href="{% url 'Hod:viewexam' %}" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                    </div>
+                </div>
+            </div-->
+            <!--div class="col" style="max-width: 45%;">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">ALUMNI MANAGEMENT</h2>
+                        <p class="card-text">The Alumni Management module helps maintain a strong connection between the institution and its past graduates. It allows administrators to track alumni career progress, update records.</p>
+                        <a href="{% url 'Admin:alumnireg' %}" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="max-width: 45%;">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">TEST MANAGEMENT</h2>
+                        <p class="card-text">The Mock Test module prepares students for recruitment processes by providing simulated tests that assess aptitude, technical skills, and interview readiness.                                             </p>
+                        <a href="" class="btn" style="background-color: #44d2f6; color: white;">VIEW</a>
+                    </div>
+                </div>
+            </div-->
+        </div>
+    </div>
+    
+  <!-- container-scroller -->
+
+  <!-- base:js -->
+  <script src="{% static 'User/vendors/js/vendor.bundle.base.js'%}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'User/vendors/chart.js/Chart.min.js'%}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'User/js/off-canvas.js'%}"></script>
+  <script src="{% static 'User/js/hoverable-collapse.js'%}"></script>
+  <script src="{% static 'User/js/template.js'%}"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'User/js/dashboard.js'%}"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

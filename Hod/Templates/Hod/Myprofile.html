@@ -1,0 +1,45 @@
+{% extends 'Hod/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover ">
+        <tr>
+            <td>Name</td>
+            <td>{{hod.hod_name}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{hod.hod_email}}</td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td>{{hod.hod_contact}}</td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td>{{hod.department.department_name}}</td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td>{{hod.hod_dob}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <a href="{% url 'Hod:editprofile' %}">Editprofile</a>
+           
+            
+                <a href="{% url 'Hod:changepassword' %}">Changepassword</a>
+           </tr>
+    </table>
+
+</body>
+</html>
+{% endblock %}

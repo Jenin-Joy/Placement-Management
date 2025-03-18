@@ -1,0 +1,60 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaint</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h3>New Complaints</h3>
+        <table class="table table-bordered table-hover " >
+            <tr>
+                <td>Sno</td>
+                <td> Name</td>
+                <td> Email</td>
+                <td> Content</td>
+                <td> Date</td>
+                <td>Action</td>
+             </tr>
+             {% for i in data %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.student.studentreg_name}}</td>
+                <td>{{i.student.studentreg_email}}</td>
+                <td>{{i.complaint_content}}</td>
+                <td>{{i.date}}</td>
+                <td><a href="{% url 'Admin:reply' i.id %}">Reply</a></td>
+             </tr>
+            {% endfor %}
+            </table>   
+
+
+
+        <h3>Replied Complaints</h3>
+        <table class="table table-bordered table-hover " >
+            <tr>
+                <td>Sno</td>
+                <td> Name</td>
+                <td> Email</td>
+                <td> Content</td>
+                <td> Date</td>
+                <td> Reply</td>
+             </tr>
+             {% for i in replied %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.student.studentreg_name}}</td>
+                <td>{{i.student.studentreg_email}}</td>
+                <td>{{i.complaint_content}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.complaint_reply}}</td>
+             </tr>
+            {% endfor %}
+            </table>   
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejected List</title>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 24px;">Rejected List</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <table  class="table table-bordered table-hover " >
+            <tr>
+                <td>Sno</td>
+                <td> KTU ID</td>
+                <td> Name</td>
+                <td> Email</td>
+                <td>Semester</td>
+                <td> Department</td>
+                <td> Academic Year</td>
+                <td> Company Name</td>
+             </tr>
+             {% for i in data %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.student.studentreg_ktuid}}</td>
+                <td>{{i.student.studentreg_name}}</td>
+                <td>{{i.student.studentreg_email}}</td>
+                <td>{{i.student.semester.semester_name}}</td>
+                <td>{{i.student.department.department_name}}</td>
+                <td>{{i.student.academicyear.academicyear_name}}</td>
+                <td>{{i.jobpost.jobpost_companyname}}</td>
+             </tr>
+            {% endfor %}
+            </table>     
+</body>
+</html>
+{% endblock %}

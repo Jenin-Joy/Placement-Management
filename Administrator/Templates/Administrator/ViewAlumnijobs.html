@@ -1,0 +1,49 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewAlumniJobs</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <table  class="table table-bordered table-hover " >
+            <tr>
+                <td>Sno</td>
+                <td> CompanyName</td>
+                <td> Details</td>
+                <td> CGPA Criteria</td>
+                <td> Backlog</td>
+                <td> Department </td>
+                <td> File</td>
+                <td> Last date</td>
+                <td>Action</td>
+             </tr>
+             {% for i in data %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.jobpost_companyname}}</td>
+                <td>{{i.jobpost_details}}</td>
+                <td>{{i.jobpost_mincgpa}}</td>
+                <td>{{i.jobpost_backlog}}</td>
+                <td>{{ i.department.department_name }}</td>
+                <td>{{i.jobpost_file_doc}}</td>
+                <td>{{i.jobpost_lastdate}}</td>
+                <td>{% if i.jobpost_status == 1 %}
+                    Verified
+                    {%  elif i.jobpost_status == 2 %}
+                    Rejected
+                    {%  else %}
+                    <a href="{% url 'Admin:verifylist' i.id %}">Verify</a>
+                    <a href="{% url 'Admin:rejectjobpost' i.id id %}">Reject</a>
+                    {% endif %}
+                    </td>
+             </tr>
+            {% endfor %}
+            </table>    
+</body>
+</html>
+{% endblock %}

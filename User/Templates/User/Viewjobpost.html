@@ -1,0 +1,40 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Jobpost</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover " >
+            <tr>
+                <td>Sno</td>
+                <td> CompanyName</td>
+                <td> Details</td>
+                <td> CGPA Criteria</td>
+                <td> File</td>
+                <td> Last date</td>
+                <td>Action</td>
+             </tr>
+             {% for i in data %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.jobpost_companyname}}</td>
+                <td>{{i.jobpost_details}}</td>
+                <td>{{i.jobpost_mincgpa}}</td>
+                <td>{{i.jobpost_file_doc}}</td>
+                <td>{{i.jobpost_lastdate}}</td>
+                <td>
+                    <a href="{% url 'User:requestjob' i.id %}">request</a>
+
+            </td>
+             </tr>
+            {% endfor %}
+            </table>    
+</body>
+</html>
+{% endblock %}

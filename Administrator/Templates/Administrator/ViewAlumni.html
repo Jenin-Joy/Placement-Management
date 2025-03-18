@@ -1,0 +1,41 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALUMNI LIST</title>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 24px;">Alumni List</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <table  class="table table-bordered table-hover " >
+            <tr>
+                <td>Sno</td>
+                <td> Name</td>
+                <td> Email</td>
+                <td> Contact</td>
+                <td> Academic Year</td>
+                <td> Department</td>
+                <td> DOB</td>
+                <td>Action</td>
+             </tr>
+             {% for i in data %}
+             <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.alumnireg_name}}</td>
+                <td>{{i.alumnireg_email}}</td>
+                <td>{{i.alumnireg_contact}}</td>
+                <td>{{i.academicyear.academicyear_name}}</td>
+                <td>{{i.department.department_name}}</td>
+                <td>{{i.alumnireg_dob}}</td>
+                <td></td>
+             </tr>
+            {% endfor %}
+            </table>     
+</body>
+</html>
+{% endblock %}

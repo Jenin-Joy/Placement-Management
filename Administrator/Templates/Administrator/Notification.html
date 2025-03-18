@@ -1,0 +1,50 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 24px;">Notifications</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover ">
+            <tr>
+                <td>Notification</td>
+                <td><input type="text" name="txt_not" placeholder="Enter Notification" required></td>
+            </tr>
+            <tr>
+                <td>CGPA Criteria</td>
+                <td><input type="text" name="txt_lim"placeholder="Enter CGPA Criteria" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btn_submit" class="btn btn-primary"style="background-color: #44d2f6; color: white; "value="SEND">
+                </td>
+            </tr>
+        </table>
+            <table class="table table-bordered table-hover "  >
+                <tr>
+                    <td>Sno</td>
+                    <td>Notification</td>
+                    <td>Limit</td>
+                    <td>Action</td>
+                 </tr>
+                 {% for i in data %}
+                 <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.notification_notification}}</td>
+                    <td>{{i.notification_limit}}</td>
+                    <td><a href="{% url 'Admin:deletenotification' i.id %}">Delete</a></td>
+                    </td>
+                 </tr>
+                {% endfor %}
+                </table> 
+    </form>
+</body>
+</html>
+{% endblock %}

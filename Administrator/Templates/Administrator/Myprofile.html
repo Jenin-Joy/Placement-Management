@@ -1,0 +1,33 @@
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY PROFILE</title>
+</head>
+<body>
+    <h1 style="font-weight: bold;font-size: 24px;">My Profile</h1>
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover ">
+        <tr>
+            <td>Name</td>
+            <td>{{admin.admin_name}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{admin.admin_email}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <a href="{% url 'Admin:editprofile' %}">Editprofile</a>
+           
+            
+               <a href="{% url 'Admin:changepassword' %}">Changepassword</a>
+           </tr>
+    </table>
+</body>
+</html>
+{% endblock %}

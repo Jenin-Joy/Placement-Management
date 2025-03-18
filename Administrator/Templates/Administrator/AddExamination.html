@@ -1,0 +1,93 @@
+
+{% extends 'Administrator/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Examination</title>
+</head>
+<body>
+  <h1 style="font-weight: bold; font-size: 24px;">Add Examination</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover ">
+            <tr>
+                <td>EXAM TYPE</td>
+                <td>
+                    <select name="sel_examtype" id="">
+                        <option value="">...Select...</option>
+                        {% for i in examtype %}
+                        <option value="{{i.id}}">{{i.examtype_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+              <td>DEPARTMENT</td>
+              <td>
+                  <select name="sel_dept" id="">
+                      <option value="">...Select...</option>
+                      {% for i in department %}
+                      <option value="{{i.id}}">{{i.department_name}}</option>
+                      {% endfor %}
+                  </select>
+              </td>
+          </tr>
+          <tr>
+            <td>EXAM NAME</td>
+            <td><input type="text" name="txt_name" id="txt_name"></td>
+          </tr>
+          <tr>
+            <td>NUMBER OF QUESTIONS</td>
+            <td><input type="text" name="txt_qno" id="txt_qno"></td>
+          </tr>
+
+          <tr>
+            <td>FROM TIME</td>
+            <td><input type="time" name="txt_ftime" id=""></td>
+          </tr>
+
+          <tr>
+            <td>TO TIME</td>
+            <td><input type="time" name="txt_ttime" id=""></td>
+          </tr>
+          <tr>
+            <td><input type="submit" class="btn btn-primary" style="background-color: #44d2f6; color: white;" value="SUBMIT"></td>
+            <td><input type="submit" class="btn btn-primary" style="background-color: #44d2f6; color: white;" value="CANCEL"></td>
+          </tr>   
+        </table>
+    </form>
+    <table class="table table-bordered">
+      <tr>
+          <th>Sno</th>
+          <th>Name</th>
+          <th>Mark</th>   
+          <th>Number of questions</th>
+          <th>Start Time</th>
+          <th>Time</th>
+          <th>Action</th>
+
+      </tr>
+          {% for i in result %}
+          <tr>
+           <td>{{forloop.counter}}</td>
+           <td>{{i.examination_name}}</td> 
+           <td>{{i.examination_mark}}</td>  
+           <td>{{i.examination_qno}}</td>    
+           <td>{{i.start_time}}</td> 
+           <td>{{i.examination_time}}</td> 
+           <td><a href="{% url 'Admin:delexm' i.id %}">Delete</a><br>
+           <a href="{% url 'Admin:addquestions' i.id %}">Add Questions</a><br>
+           <a href="{% url 'Admin:startexam' i.id %}">Start Exam</a></td>
+    
+           
+      </tr>
+      {% endfor %}
+  </table>
+          
+    
+</body>
+</html>
+{% endblock %}
