@@ -12,7 +12,25 @@
 
     <form method="post" style="    overflow-x: auto;">
         {% csrf_token %}
-        <table  class="table table-bordered table-hover " >
+        <table class="table table-bordered table-hover ">
+            <tr>
+                <td>Department</td>
+                <td>
+                    <select name="sel_dept" id="sel_dept" onchange="ajaxstudentList()">
+                        <option value="">...Select...</option>
+                        {% for i in department %}
+                        <option value="{{i.id}}">{{i.department_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>Back Log</td>
+                <td><input type="text" name="txt_backlog" id="txt_backlog" onkeyup="ajaxstudentList()"></td>
+                <td>CGPA</td>
+                <td><input type="text" name="txt_cgpa" id="txt_cgpa" onkeyup="ajaxstudentList()"></td>
+            </tr>
+        </table>
+        
+        <table  class="table table-bordered table-hover " id="result" >
             <tr>
                 <td>Sno</td>
                 <td> KTU ID</td>
@@ -27,7 +45,7 @@
                 <td> DOB</td>
                 <td>Action</td>
              </tr>
-             {% for i in data %}
+                {% for i in data %}
              <tr>
                 <td>{{forloop.counter}}</td>
                 <td>{{i.studentreg_ktuid}}</td>
@@ -43,8 +61,25 @@
                 <td><a href="{% url 'Admin:deletestudent' i.id %}">Delete</a></td>
                 <td><a href="{% url 'Admin:editstudent' i.id %}">Edit</a></td>
              </tr>
-            {% endfor %}
-            </table>     
+             {% endfor %}
+            </table>  
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function ajaxstudentList() {
+        var result  = document.getElementById('result')
+        var dept = document.getElementById('sel_dept').value
+        var cgpa = document.getElementById('txt_cgpa').value
+        var backlog = document.getElementById('txt_backlog').value
+        var ur = "{% url 'Admin:ajaxstudentlist' %}"
+        $.ajax({
+            url: ur,
+            data: { dept: dept,cgpa:cgpa, backlog:backlog },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+    }
+</script>
 {% endblock %}

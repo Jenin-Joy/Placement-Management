@@ -1,0 +1,33 @@
+<table  class="table table-bordered table-hover " id="result" >
+    <tr>
+        <td>Sno</td>
+        <td> KTU ID</td>
+        <td> Name</td>
+        <td> Email</td>
+        <td> Contact</td>
+        <td> Semester</td>
+        <td> Academic Year</td>
+        <td> Department</td>
+        <td> CGPA</td>
+        <td> Backlogs</td>
+        <td> DOB</td>
+        <td>Action</td>
+     </tr>
+        {% for i in students %}
+     <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.studentreg_ktuid}}</td>
+        <td>{{i.studentreg_name}}</td>
+        <td>{{i.studentreg_email}}</td>
+        <td>{{i.studentreg_contact}}</td>
+        <td>{{i.semester.semester_name}}</td>
+        <td>{{i.academicyear.academicyear_name}}</td>
+        <td>{{i.department.department_name}}</td>
+        <td>{{i.studentreg_cgpa}}</td>
+        <td>{{i.studentreg_backlog}}</td>
+        <td>{{i.studentreg_dob}}</td>
+        <td><a href="{% url 'Admin:deletestudent' i.id %}">Delete</a></td>
+        <td><a href="{% url 'Admin:editstudent' i.id %}">Edit</a></td>
+     </tr>
+     {% endfor %}
+    </table> 

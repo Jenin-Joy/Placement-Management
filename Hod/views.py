@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from Administrator.models import *
 from User.models import *
+from datetime import date
+from django.http import JsonResponse
 
 
 def myprofile(request):
@@ -8,6 +10,25 @@ def myprofile(request):
     return render(request,"Hod/Myprofile.html",{'hod':hod})
 def Homepage(request):
     return render(request,'Hod/Homepage.html')
+
+def get_bar_chart(request):
+    placement = []
+    y = []
+    hod=tbl_hod.objects.get(id=request.session['hid'])
+    dept = tbl_department.objects.get(id=hod.department.id)
+    for i in range(0,4):
+        dates = date.today()
+        year = dates.year - int(i)
+        y.append(year)
+        count = tbl_jobrequest.objects.filter(student__department=hod.department.id,status=1,date__year=year).count()
+        placement.append(count)
+    y.reverse()
+    placement.reverse()
+    return JsonResponse({
+        "labels": y,
+        "data": placement
+    })
+
 def editprofile(request):
     hod=tbl_hod.objects.get(id=request.session['hid'])
     if request.method=="POST":

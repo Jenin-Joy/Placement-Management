@@ -16,4 +16,7 @@ urlpatterns = [
 
     path('viewexam/',views.viewexam,name="viewexam"),
     path('viewresult/<int:id>',views.viewresult,name="viewresult"),
+
+    path('get_bar_chart/',views.get_bar_chart,name="get_bar_chart"),
+
 ]

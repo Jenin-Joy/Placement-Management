@@ -7,6 +7,7 @@ import pandas as pd
 from django.conf import settings
 from django.core.mail import send_mail
 from datetime import datetime
+from django.http import JsonResponse
 
 def adminreg(request):
     data=tbl_admin.objects.all()
@@ -178,7 +179,8 @@ def editexamtype(request,id):
         return render(request,"Administrator/Examtype.html",{'edit':ed})
 def studentlist(request):
     data=tbl_studentreg.objects.all()
-    return render(request,'Administrator/StudentList.html',{'data':data})
+    department = tbl_department.objects.all()
+    return render(request,'Administrator/StudentList.html',{'data':data,"department":department})
 def jobpost(request):
     alumini = tbl_alumnireg.objects.all()
     data = tbl_jobpost.objects.filter().exclude(alumini__in=alumini)
@@ -601,3 +603,20 @@ def completeexam(request, id):
     exam.examination_status = 2
     exam.save()
     return redirect("Admin:completedexam")
+
+def ajaxstudentlist(request):
+    if request.GET.get('dept') != "" and request.GET.get('cgpa') != "" and request.GET.get('backlog') != "":
+        students = tbl_studentreg.objects.filter(department=request.GET.get('dept'), studentreg_cgpa__gte=request.GET.get('cgpa'), studentreg_backlog__lte=request.GET.get('backlog'))
+    elif request.GET.get('dept') != "" and request.GET.get('cgpa') != "":
+        students = tbl_studentreg.objects.filter(department=request.GET.get('dept'), studentreg_cgpa__gte=request.GET.get('cgpa'))
+    elif request.GET.get('dept') != "" and request.GET.get('backlog') != "":
+        students = tbl_studentreg.objects.filter(department=request.GET.get('dept'), studentreg_backlog__lte=request.GET.get('backlog'))
+    elif request.GET.get('cgpa') != "" and request.GET.get('backlog') != "":
+        students = tbl_studentreg.objects.filter(studentreg_cgpa__gte=request.GET.get('cgpa'), studentreg_backlog__lte=request.GET.get('backlog'))
+    elif request.GET.get('dept') != "":
+        students = tbl_studentreg.objects.filter(department=request.GET.get('dept'))
+    elif request.GET.get('cgpa') != "":
+        students = tbl_studentreg.objects.filter(studentreg_cgpa__gte=request.GET.get('cgpa'))
+    elif request.GET.get('backlog') != "":
+        students = tbl_studentreg.objects.filter(studentreg_backlog__lte=request.GET.get('backlog'))
+    return render(request,"Administrator/Ajaxstudetlist.html",{"students":students})

@@ -115,6 +115,8 @@
       </ul>
     </nav>
     <!-- partial -->
+
+    
     <div class="container-fluid page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
       <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
@@ -304,6 +306,7 @@
                   </div>
               </div>
           </div>
+          <canvas id="barChart"></canvas>
             <!--div class="col" style="max-width: 45%;">
                 <div class="card">
                     <div class="card-body">
@@ -335,6 +338,53 @@
     </div>
     
   <!-- container-scroller -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+      $(document).ready(function () {
+          var ur = "{% url 'Hod:get_bar_chart' %}"; // Update with your actual URL name
+
+          $.ajax({
+              url: ur,
+              method: "GET",
+              success: function (data) {
+                console.log(data);
+                
+                  var ctx = document.getElementById("barChart").getContext("2d");
+
+                  new Chart(ctx, {
+                      type: "bar",
+                      data: {
+                          labels: data.labels, // Department names
+                          datasets: [{
+                              label: "Placement Count",
+                              data: data.data, // Count of departments
+                              backgroundColor: "rgba(54, 162, 235, 0.6)",
+                              borderColor: "rgba(54, 162, 235, 1)",
+                              borderWidth: 1
+                          }]
+                      },
+                      options: {
+                          responsive: true,
+                          plugins: {
+                              title: {
+                                  display: true,
+                                  text: "Current Year Department Statistics",
+                                  font: { size: 18 }
+                              }
+                          },
+                          scales: {
+                              y: {
+                                  beginAtZero: true
+                              }
+                          }
+                      }
+                  });
+              },
+          });
+      });
+  </script>
 
   <!-- base:js -->
   <script src="{% static 'User/vendors/js/vendor.bundle.base.js'%}"></script>

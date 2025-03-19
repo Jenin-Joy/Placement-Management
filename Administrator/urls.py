@@ -63,6 +63,9 @@ urlpatterns = [
     path('completedexam/',views.completedexam,name="completedexam"),
     path('completeexam/<int:id>',views.completeexam,name="completeexam"),
     path('viewresult/<int:id>',views.viewresult,name="viewresult"),
+
+    path('ajaxstudentlist/',views.ajaxstudentlist,name="ajaxstudentlist"),
+
 ]
 
 
