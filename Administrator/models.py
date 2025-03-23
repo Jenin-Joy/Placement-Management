@@ -63,6 +63,7 @@ class tbl_examination(models.Model):
     examination_qno=models.CharField(max_length=50) 
     examination_time=models.CharField(max_length=50) 
     examination_status = models.IntegerField(default=0)
+    examination_date = models.DateField(null=True)
     time = models.TimeField(null=True)
     start_time = models.TimeField(null=True)
     examtype = models.ForeignKey(tbl_examtype, on_delete=models.CASCADE)

@@ -537,7 +537,7 @@ def examinationdetails(request):
         minutes = int((total_seconds % 3600) // 60)
         
         time = str(hours) +" hours and "+ str(minutes) +" minutes"
-        tbl_examination.objects.create(examination_name=name,examination_mark=qno,examination_qno=qno,examination_time=time,time=str(time_diff),start_time=ftime,examtype=tbl_examtype.objects.get(id=request.POST.get("sel_examtype")),department=tbl_department.objects.get(id=request.POST.get("sel_dept")))
+        tbl_examination.objects.create(examination_name=name,examination_mark=qno,examination_qno=qno,examination_time=time,time=str(time_diff),start_time=ftime,examtype=tbl_examtype.objects.get(id=request.POST.get("sel_examtype")),department=tbl_department.objects.get(id=request.POST.get("sel_dept")),examination_date=request.POST.get("txt_date"))
 
     return render(request,'Administrator/AddExamination.html',{'result':exm,"examtype":examtype,"department":department})
 

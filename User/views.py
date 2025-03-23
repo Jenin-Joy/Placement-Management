@@ -81,7 +81,8 @@ def notification(request):
 
 
 def viewexam(request):
-    exam = tbl_examination.objects.all()
+    user = tbl_studentreg.objects.get(id=request.session["sid"])
+    exam = tbl_examination.objects.filter(department=user.department.id,examination_status__gt=0)
     for i in exam:
         exambodycount = tbl_examinationbody.objects.filter(examination=i.id,student=request.session["sid"],examinationbody_status=1).count()
         if exambodycount > 0:
@@ -171,3 +172,8 @@ def department_chart_data(request):
         "labels": department_names,
         "data": placement
     })
+
+def examnotification(request):
+    user = tbl_studentreg.objects.get(id=request.session["sid"])
+    exam = tbl_examination.objects.filter(department=user.department.id,examination_status=0)
+    return render(request,"User/ExaminationNotification.html",{'exam':exam})

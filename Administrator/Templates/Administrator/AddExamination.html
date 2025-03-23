@@ -54,6 +54,10 @@
             <td><input type="time" name="txt_ttime" id=""></td>
           </tr>
           <tr>
+            <td>Date</td>
+            <td><input type="date" name="txt_date" id="txt_date"></td>
+          </tr>
+          <tr>
             <td><input type="submit" class="btn btn-primary" style="background-color: #44d2f6; color: white;" value="SUBMIT"></td>
             <td><input type="submit" class="btn btn-primary" style="background-color: #44d2f6; color: white;" value="CANCEL"></td>
           </tr>   
@@ -67,6 +71,7 @@
           <th>Number of questions</th>
           <th>Start Time</th>
           <th>Time</th>
+          <th>Date</th>
           <th>Action</th>
 
       </tr>
@@ -78,6 +83,7 @@
            <td>{{i.examination_qno}}</td>    
            <td>{{i.start_time}}</td> 
            <td>{{i.examination_time}}</td> 
+           <td>{{ i.examination_date }}</td>
            <td><a href="{% url 'Admin:delexm' i.id %}">Delete</a><br>
            <a href="{% url 'Admin:addquestions' i.id %}">Add Questions</a><br>
            <a href="{% url 'Admin:startexam' i.id %}">Start Exam</a></td>
@@ -90,4 +96,8 @@
     
 </body>
 </html>
+<script>
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('txt_date').setAttribute('min', today);
+</script>
 {% endblock %}

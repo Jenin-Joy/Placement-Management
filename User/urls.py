@@ -12,6 +12,7 @@ urlpatterns = [
     path("Requestjob/<int:id>",views.requestjob,name="requestjob"),
     path('Viewjobpost/',views.jobpost,name="viewjobpost"),
     path('notification/',views.notification,name="notification"),
+    path('examnotification/',views.examnotification,name="examnotification"),
 
     path('viewexam/',views.viewexam,name='viewexam'),
     path('viewquestion/<int:id>',views.viewquestion,name='viewquestion'),
