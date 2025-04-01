@@ -29,8 +29,12 @@
                 <td>{{i.jobpost_details}}</td>
                 <td>{{i.jobpost_mincgpa}}</td>
                 <td>{{i.jobpost_backlog}}</td>
-                <td>{{ i.department.department_name }}</td>
-                <td>{{i.jobpost_file_doc}}</td>
+                <td>
+                    {% for d in i.tbl_jobpostdepartment_set.all %}
+                    {{d.department.department_name}},<br>
+                    {% endfor %}
+                </td>
+                <td><a href="{{i.jobpost_file_doc.url}}">View File</a></td>
                 <td>{{i.jobpost_lastdate}}</td>
                 <td>{% if i.jobpost_status == 1 %}
                     Verified

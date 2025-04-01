@@ -18,6 +18,7 @@
                 <td> CGPA Criteria</td>
                 <td> File</td>
                 <td> Last date</td>
+                <td>Departments</td>
                 <td>Action</td>
              </tr>
              {% for i in data %}
@@ -26,8 +27,13 @@
                 <td>{{i.jobpost_companyname}}</td>
                 <td>{{i.jobpost_details}}</td>
                 <td>{{i.jobpost_mincgpa}}</td>
-                <td>{{i.jobpost_file_doc}}</td>
+                <td><a href="{{i.jobpost_file_doc.url}}">View File</a></td>
                 <td>{{i.jobpost_lastdate}}</td>
+                <td>
+                    {% for d in i.tbl_jobpostdepartment_set.all %}
+                    {{d.department.department_name}},<br>
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{% url 'User:requestjob' i.id %}">request</a>
 

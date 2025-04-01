@@ -66,7 +66,7 @@ def jobpost(request):
     cgpa=user.studentreg_cgpa
     backlog=user.studentreg_backlog
     department=user.department
-    data=tbl_jobpost.objects.filter(department=department,jobpost_mincgpa__lte=cgpa,jobpost_backlog__lte=backlog)
+    data=tbl_jobpost.objects.filter(tbl_jobpostdepartment__department=department,jobpost_mincgpa__lte=cgpa,jobpost_backlog__lte=backlog)
     return render(request,'User/Viewjobpost.html',{'data':data})
 def requestjob(request,id):
     tbl_jobrequest.objects.create(

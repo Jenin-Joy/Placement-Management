@@ -190,27 +190,41 @@ def jobpost(request):
         companyname = request.POST.get('txt_companyname')
         details = request.POST.get('txt_details')
         mincgpa = float(request.POST.get('txt_mincgpa'))
-        jobpost_department = request.POST.get('sel_Dept')  
+        jobpost_department = request.POST.getlist('sel_Dept[]')  
         backlog = request.POST.get('txtback')  
-        file_doc = request.POST.get('file_doc')
+        file_doc = request.FILES.get('file_doc')
         lastdate = request.POST.get('txt_lastdate')
-        department=tbl_department.objects.get(id=jobpost_department)
+        # department=tbl_department.objects.get(id=jobpost_department)
         # Create the job post
-        tbl_jobpost.objects.create(
+        job = tbl_jobpost.objects.create(
             jobpost_companyname=companyname,
             jobpost_details=details,
             jobpost_mincgpa=mincgpa,
-            department=department,
             jobpost_backlog=backlog,
             jobpost_file_doc=file_doc,
             jobpost_lastdate=lastdate,
         )
+
+        for i in jobpost_department:
+            tbl_jobpostdepartment.objects.create(
+                department = tbl_department.objects.get(id=i),
+                jobpost = tbl_jobpost.objects.get(id=job.id)
+            )
         
+
+        jdep_string = ''
+        jdepid = []
+        jp = tbl_jobpostdepartment.objects.filter(jobpost=job.id)
+        for j in jp:
+            jdep_string = jdep_string + ', ' + j.department.department_name
+            jdepid.append(j.department.id)
+
+
         # Get eligible students (CGPA >= mincgpa and no backlogs)
         eligible_students = tbl_studentreg.objects.filter(
             studentreg_cgpa__gte=mincgpa,  # Greater than or equal to min CGPA
             studentreg_backlog__lte= backlog ,# Assuming '0' means no backlogs
-            department= department
+            department__in= jdepid
         )
         
         # Prepare email content
@@ -221,7 +235,7 @@ def jobpost(request):
             f"Company: {companyname}\n"
             f"Details: {details}\n"
             f"Minimum CGPA Required: {mincgpa}\n"
-            f"Department: {department.department_name}\n"
+            f"Department: {jdep_string}\n"
             f"Backlog Limit: {backlog}\n"
             f"Last Date to Apply: {lastdate}\n\n"
             "Please check the attached document (if any) and apply before the deadline.\n"
@@ -357,10 +371,8 @@ def upload_excel(request):
                 )
 
             messages.success(request, "File uploaded and data saved successfully!")
-            print(messages)
 
         except Exception as e:
-            print(e)
             messages.error(request, f"Error processing file: {str(e)}")
 
     return render(request, "Administrator/StudentExcel.html",{'year':year,'department':department,'semester':semester})
@@ -469,15 +481,22 @@ def verifylist(request,id):
     companyname = data.jobpost_companyname
     details = data.jobpost_details
     mincgpa = data.jobpost_mincgpa
-    jobpost_department = data.department.department_name
+    # jobpost_department = data.department.department_name
     backlog = data.jobpost_backlog
     file_doc = data.jobpost_file_doc
     lastdate = data.jobpost_lastdate
 
+    jdep_string = ''
+    jdepid = []
+    jp = tbl_jobpostdepartment.objects.filter(jobpost=id)
+    for j in jp:
+        jdep_string = jdep_string + ', ' + j.department.department_name
+        jdepid.append(j.department.id)
+
     eligible_students = tbl_studentreg.objects.filter(
             studentreg_cgpa__gte=mincgpa,  # Greater than or equal to min CGPA
             studentreg_backlog__lte= backlog ,# Assuming '0' means no backlogs
-            department= data.department.id
+            department__in= jdepid
         )
     
 
@@ -490,7 +509,7 @@ def verifylist(request,id):
         f"Company: {companyname}\n"
         f"Details: {details}\n"
         f"Minimum CGPA Required: {mincgpa}\n"
-        f"Department: {jobpost_department}\n"
+        f"Department: {jdep_string}\n"
         f"Backlog Limit: {backlog}\n"
         f"Last Date to Apply: {lastdate}\n\n"
         "Please check the attached document (if any) and apply before the deadline.\n"

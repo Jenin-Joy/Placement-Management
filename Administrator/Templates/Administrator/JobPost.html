@@ -28,12 +28,15 @@
     <tr>
         <td>Department</td>
         <td>
-            <select name="sel_Dept">
+            <!-- <select name="sel_Dept">
                 <option>--select--</option>
                 {% for i in department %}
-                <option {% if edit.department_id == i.id  %} selected {% endif %} value="{{i.id}}">{{i.department_name}}</option>
+                <option value="{{i.id}}">{{i.department_name}}</option>
                 {% endfor %}
-            </select>
+            </select> -->
+            {% for i in department %}
+            <input type="checkbox" name="sel_Dept[]" value="{{i.id}}" id=""> {{i.department_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% endfor %}
         </td>
     </tr>
     <tr>
@@ -64,6 +67,7 @@
         <td>Backlogs</td>
         <td>File</td>
         <td>Last Date</td>
+        <td>Departments</td>
         <td>Action</td>
      </tr>
      {% for i in data %}
@@ -73,8 +77,13 @@
         <td>{{i.jobpost_details}}</td>
         <td>{{i.jobpost_mincgpa}}</td>
         <td>{{i.jobpost_backlog}}</td>
-        <td>{{i.jobpost_file_doc}}</td>
+        <td><a href="{{i.jobpost_file_doc.url}}">View File</a></td>
         <td>{{i.jobpost_lastdate}}</td>
+        <td>
+            {% for d in i.tbl_jobpostdepartment_set.all %}
+            {{d.department.department_name}},<br>
+            {% endfor %}
+        </td>
         <td><a href="{% url 'Admin:deletedjobpost' i.id %}">Delete</a>
             <a href="{% url 'Admin:Eligiblelist' i.id %}">View Eligible Students</a>
         </td>

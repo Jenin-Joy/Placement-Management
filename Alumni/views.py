@@ -43,21 +43,25 @@ def jobpost(request):
         companyname=request.POST.get('txt_companyname')
         details=request.POST.get('txt_details')
         mincgpa=request.POST.get('txt_mincgpa')
-        jobpost_department = request.POST.get('sel_Dept')  
+        jobpost_department = request.POST.getlist('sel_Dept[]')  
         backlog=request.POST.get('txtback')
-        file_doc=request.POST.get('file_doc')
+        file_doc=request.FILES.get('file_doc')
         lastdate=request.POST.get('txt_lastdate')
-        department=tbl_department.objects.get(id=jobpost_department)
-        tbl_jobpost.objects.create(
+        # department=tbl_department.objects.get(id=jobpost_department)
+        job = tbl_jobpost.objects.create(
             jobpost_companyname=companyname,
             jobpost_details=details,
             jobpost_mincgpa=mincgpa,
-            department=department,
             jobpost_backlog=backlog,
             jobpost_file_doc=file_doc,
             jobpost_lastdate=lastdate,
             alumini=tbl_alumnireg.objects.get(id=request.session['aid'])
         )
+        for i in jobpost_department:
+            tbl_jobpostdepartment.objects.create(
+                department = tbl_department.objects.get(id=i),
+                jobpost = tbl_jobpost.objects.get(id=job.id)
+            )
         return redirect("Alumni:jobpost")
     else:
         return render(request,'Alumni/JobPost.html',{'data':data,'department':department})

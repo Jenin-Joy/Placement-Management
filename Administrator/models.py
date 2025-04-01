@@ -44,12 +44,16 @@ class tbl_jobpost(models.Model):
     jobpost_details=models.CharField(max_length=50)
     jobpost_companyname=models.CharField(max_length=50)
     jobpost_mincgpa=models.CharField(max_length=50)
-    department=models.ForeignKey(tbl_department,on_delete=models.CASCADE)
     jobpost_backlog=models.CharField(max_length=50)
-    jobpost_file_doc=models.CharField(max_length=50)
+    jobpost_file_doc=models.FileField(upload_to="Assets/jobpost/")
     jobpost_lastdate=models.DateField()
     alumini=models.ForeignKey(tbl_alumnireg,on_delete=models.CASCADE,null=True)
     jobpost_status = models.IntegerField(default=0)
+
+class tbl_jobpostdepartment(models.Model):
+    department=models.ForeignKey(tbl_department,on_delete=models.CASCADE)
+    jobpost=models.ForeignKey(tbl_jobpost,on_delete=models.CASCADE)
+
 class tbl_complaint(models.Model):
     complaint_content=models.CharField(max_length=50)
     date=models.DateField(auto_now_add=True)
