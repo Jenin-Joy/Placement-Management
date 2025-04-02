@@ -64,17 +64,21 @@ def studentlist(request):
     data=tbl_studentreg.objects.filter(department=request.session['dept'])
     return render(request,'Hod/Studentlist.html',{'data':data})
 def confirmlist(request):
-    data=tbl_jobrequest.objects.filter(jobpost__department=request.session['dept'])
+    data=tbl_jobrequest.objects.filter(jobpost__tbl_jobpostdepartment__department=request.session['dept'])
     return render(request,'Hod/Confirmlist.html',{'data':data})
 def placedlist(request):
-    data=tbl_jobrequest.objects.filter(jobpost__department=request.session['dept'],status=1)
+    data=tbl_jobrequest.objects.filter(jobpost__tbl_jobpostdepartment__department=request.session['dept'],status=1)
     return render(request,'Hod/Placedlist.html',{'data':data})
 def viewjobs(request):
-    data=tbl_jobpost.objects.filter(department=request.session['dept'])
+    data=tbl_jobpost.objects.filter(tbl_jobpostdepartment__department=request.session['dept'])
     return render(request,'Hod/Joblist.html',{'data':data})
 def eligiblelist(request,id):
     data=tbl_jobpost.objects.get(id=id)
-    student=tbl_studentreg.objects.filter(studentreg_cgpa__gte=data.jobpost_mincgpa,studentreg_backlog__lte=data.jobpost_backlog,department=data.department)
+    dept = []
+    d= tbl_jobpostdepartment.objects.filter(jobpost=id)
+    for i in d:
+        dept.append(i.department.id)
+    student=tbl_studentreg.objects.filter(studentreg_cgpa__gte=data.jobpost_mincgpa,studentreg_backlog__lte=data.jobpost_backlog,department__in=dept)
     # print(student)
     return render(request,'Hod/Eligiblelist.html',{'student':student,'company':data})
 

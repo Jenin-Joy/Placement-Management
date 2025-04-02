@@ -76,7 +76,7 @@ def requestjob(request,id):
 
 def notification(request):
     student = tbl_studentreg.objects.get(id=request.session["sid"])
-    jobpost = tbl_jobpost.objects.filter(jobpost_mincgpa__lte=student.studentreg_cgpa,department=student.department.id,jobpost_backlog__lte=student.studentreg_backlog)
+    jobpost = tbl_jobpost.objects.filter(jobpost_mincgpa__lte=student.studentreg_cgpa,tbl_jobpostdepartment__department=student.department.id,jobpost_backlog__lte=student.studentreg_backlog)
     return render(request,"User/Notification.html",{"notification":jobpost})
 
 
