@@ -473,7 +473,11 @@ def rejectlist(request):
     return render(request,'Administrator/Rejectedlist.html',{'data':data})
 def eligiblelist(request,id):
     data=tbl_jobpost.objects.get(id=id)
-    student=tbl_studentreg.objects.filter(studentreg_cgpa__gte=data.jobpost_mincgpa,studentreg_backlog__lte=data.jobpost_backlog,department=data.department)
+    dept = []
+    d= tbl_jobpostdepartment.objects.filter(jobpost=id)
+    for i in d:
+        dept.append(i.department.id)
+    student=tbl_studentreg.objects.filter(studentreg_cgpa__gte=data.jobpost_mincgpa,studentreg_backlog__lte=data.jobpost_backlog,department__in=dept)
     # print(student)
     return render(request,'Administrator/Eligiblelist.html',{'student':student,'company':data})
 def verifylist(request,id):
