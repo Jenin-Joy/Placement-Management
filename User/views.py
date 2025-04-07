@@ -67,6 +67,10 @@ def jobpost(request):
     backlog=user.studentreg_backlog
     department=user.department
     data=tbl_jobpost.objects.filter(tbl_jobpostdepartment__department=department,jobpost_mincgpa__lte=cgpa,jobpost_backlog__lte=backlog)
+    for i in data:
+        jobcount = tbl_jobrequest.objects.filter(student=request.session["sid"],jobpost=i.id).count()
+        if jobcount > 0:
+            i.status = 1
     return render(request,'User/Viewjobpost.html',{'data':data})
 def requestjob(request,id):
     tbl_jobrequest.objects.create(

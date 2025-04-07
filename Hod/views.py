@@ -73,12 +73,11 @@ def viewjobs(request):
     data=tbl_jobpost.objects.filter(tbl_jobpostdepartment__department=request.session['dept'])
     return render(request,'Hod/Joblist.html',{'data':data})
 def eligiblelist(request,id):
+    hod = tbl_hod.objects.get(id=request.session["hid"])
     data=tbl_jobpost.objects.get(id=id)
     dept = []
     d= tbl_jobpostdepartment.objects.filter(jobpost=id)
-    for i in d:
-        dept.append(i.department.id)
-    student=tbl_studentreg.objects.filter(studentreg_cgpa__gte=data.jobpost_mincgpa,studentreg_backlog__lte=data.jobpost_backlog,department__in=dept)
+    student=tbl_studentreg.objects.filter(studentreg_cgpa__gte=data.jobpost_mincgpa,studentreg_backlog__lte=data.jobpost_backlog,department=hod.department.id)
     # print(student)
     return render(request,'Hod/Eligiblelist.html',{'student':student,'company':data})
 

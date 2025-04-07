@@ -35,7 +35,11 @@
                     {% endfor %}
                 </td>
                 <td>
+                    {% if i.status == 1 %}
+                    You Requested To This Job
+                    {% else %}
                     <a href="{% url 'User:requestjob' i.id %}">request</a>
+                    {% endif %}
 
             </td>
              </tr>

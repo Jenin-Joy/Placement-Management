@@ -183,7 +183,8 @@ def studentlist(request):
     return render(request,'Administrator/StudentList.html',{'data':data,"department":department})
 def jobpost(request):
     alumini = tbl_alumnireg.objects.all()
-    data = tbl_jobpost.objects.filter().exclude(alumini__in=alumini)
+    # data = tbl_jobpost.objects.filter().exclude(alumini__in=alumini)
+    data = tbl_jobpost.objects.filter(jobpost_status=1)
     department=tbl_department.objects.all()
     
     if request.method == "POST":
@@ -203,6 +204,7 @@ def jobpost(request):
             jobpost_backlog=backlog,
             jobpost_file_doc=file_doc,
             jobpost_lastdate=lastdate,
+            jobpost_status=1
         )
 
         for i in jobpost_department:
